@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Predictive Maintenance Detection</title>
+  <style>
+    body {
+      background-color: #d4a3ae;
+      font-family: Arial, sans-serif;
+    }
+    center {
+      margin: 20px auto;
+      width: 500px;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+    .error {
+      color: red;
+      font-size: smaller;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var emptyFields = [];
+      var hasError = false;
+      var inputs = document.querySelectorAll("input[type='text']");
+
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].value === "") {
+          emptyFields.push(inputs[i].name);
+          hasError = true;
+          inputs[i].classList.add("error");
+        } else {
+          inputs[i].classList.remove("error");
+        }
+      }
+
+      if (hasError) {
+        alert("Please fill in the following fields: " + emptyFields.join(", "));
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <center>
+    <h1> PREDICTIVE MAINTENANCE DETECTION </h1><br>
+    <form method="POST" action="{{ url_for('predict') }}" onsubmit="return validateForm()">
+      <b>
+        <label for="Type">Type: </label>
+        <input type="text" id="Type" name="Type" placeholder="Enter Type (H, M or L)" required>
+        <span class="error"></span><br><br>
+        <label for="Air_temperature">Air temperature [K]: </label>
+        <input type="text" id="Air_temperature" name="Air_temperature" placeholder="Enter Air temperature" required>
+        <span class="error"></span><br><br>
+        <label for="Process_temperature">Process temperature [K]: </label>
+        <input type="text" id="Process_temperature" name="Process_temperature" placeholder="Enter Process temperature" required>
+        <span class="error"></span><br><br>
+        <label for="Rotational_speed">Rotational speed [rpm]: </label>
+        <input type="text" id="Rotational_speed" name="Rotational_speed" placeholder="Enter Rotational speed" required>
+        <span class="error"></span><br><br>
+        <label for="Torque">Torque [Nm]: </label>
+        <input type="text" id="Torque" name="Torque" placeholder="Enter Torque" required>
+        <span class="error"></span><br><br>
+        <label for="Tool_wear">Tool wear [min]: </label>
+        <input type="text" id="Tool_wear" name="Tool_wear" placeholder="Enter Tool wear" required>
+        <span class="error"></span><br><br>
+        <label for="TWF">TWF: </label>
+        <input type="text" id="TWF" name="TWF" placeholder="Enter TWF" required>
+        <span class="error"></span><br><br>
+        <label for="HDF">HDF: </label>
+        <input type="text" id="HDF" name="HDF" placeholder="Enter HDF" required>
+        <span class="error"></span><br><br>
+        <label for="PWF">PWF: </label>
+        <input type="text" id="PWF" name="PWF" placeholder="Enter PWF" required>
+        <span class="error"></span><br><br>
+        <label for="OSF">OSF: </label>
+        <input type="text" id="OSF" name="OSF" placeholder="Enter OSF" required>
+        <span class="error"></span><br><br>
+        <label for="RNF">RNF: </label>
+        <input type="text" id="RNF" name="RNF" placeholder="Enter RNF" required>
+        <span class="error"></span><br><br>
+        <input type="submit" value="Predict!">
+      </b>
+    </form>
+  </center>
+</body>
+</html>
